@@ -1,0 +1,15 @@
+<h2>Processes</h2>
+<table style="width:50%" *ngIf='processInstances'>
+  <tr>
+    <th>Process</th>
+    <th>Timestamp</th>
+  </tr>
+  <tr *ngFor='let process of processInstances'>
+    <th>
+    	<a [href]='process.url' target="_blank">{{process.title}}</a>
+    </th>
+    <th>{{process.timestamp | date:'medium'}}</th>
+  </tr>
+</table>
+
+total errors: {{totalErrors}}

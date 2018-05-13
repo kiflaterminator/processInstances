@@ -1,0 +1,69 @@
+<h3>Create new process instances</h3>
+<form style="width:50%" #processInstanceForm="ngForm"
+(ngSubmit)="createProcessInstance(processInstanceForm.value)">
+	<label>title: 
+		<input type="text" name="title"
+		[ngModel] = "newProcess.title"
+		required
+		pattern="^[A-Za-z0-9\s]+$"
+		#title = "ngModel">
+	</label>
+	<label>url: 
+		<input type="text" name="url"
+		[ngModel] = "newProcess.url"
+		required
+		pattern="[a-z0-9.-]+\.[a-z]{2,3}$"
+		#url = "ngModel">
+	</label>
+	<label>errors: 
+		<input type="number" name="errors"
+		[ngModel] = "newProcess.errors"
+		required
+		pattern="^[0-9]+$"
+		#errors = "ngModel">
+	</label>
+	<label>timestamp: 
+		<input type="text" name="timestamp"
+		[ngModel] = "newProcess.timestamp"
+		required
+		pattern="^[0-9]+$"
+		#timestamp = "ngModel">
+	</label>
+	<input type="submit" name="go"
+	[disabled]="!processInstanceForm.form.valid">
+
+<div *ngIf="url.invalid && (url.dirty || url.touched)">
+    <div *ngIf = "url.errors?.required">
+        URL required
+    </div>
+    <div *ngIf = "url.errors?.pattern && url.touched">
+        URL is incorrect
+    </div>
+ </div>
+
+<div *ngIf="errors.invalid && (errors.dirty || errors.touched)">
+    <div *ngIf = "errors.errors?.required">
+        Errors field is required
+    </div>
+    <div *ngIf = "errors.errors?.pattern && errors.touched">
+        Errors should be a number
+    </div>
+ </div>
+
+<div *ngIf="title.invalid && (title.dirty || title.touched)">
+    <div *ngIf = "title.errors?.required">
+        Title required
+    </div>
+    <div *ngIf = "title.errors?.pattern && title.touched">
+        Title can only contain letters, numbers and spaces
+    </div>
+ </div>
+<div *ngIf="timestamp.invalid && (timestamp.dirty || timestamp.touched)">
+    <div *ngIf = "timestamp.errors?.required">
+        Timestamp required
+    </div>
+    <div *ngIf = "timestamp.errors?.pattern && timestamp.touched">
+        Timestamp should be correct
+    </div>
+ </div>
+</form>
